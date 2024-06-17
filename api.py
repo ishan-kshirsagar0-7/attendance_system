@@ -7,12 +7,26 @@ import os
 import shutil
 import logging
 from starlette.background import BackgroundTasks
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Enable CORS
+origins = [
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def cleanup_file(file_path: str):
     if os.path.exists(file_path):
