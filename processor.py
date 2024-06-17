@@ -91,7 +91,7 @@ def process_attendance(file_path):
         undertime_str = str(undertime_hours)
         adjusted_overtime_str = str(adjusted_overtime_hours)
 
-        final_output = final_output.append({
+        final_output = pd.concat([final_output, pd.DataFrame([{
             'Employee Name': employee_name,
             'Department': department,
             'Present Days': int(float(present_days)),
@@ -99,6 +99,6 @@ def process_attendance(file_path):
             'Overtime (hours)': overtime_str,
             'Undertime (hours)': undertime_str,
             'Adjusted Overtime (hours)': adjusted_overtime_str
-        }, ignore_index=True)
+        }])], ignore_index=True)
 
     return final_output
